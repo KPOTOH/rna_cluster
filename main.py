@@ -43,9 +43,9 @@ mat = mat.T  # becase we want (samples,features) matrix
 per_cell_sum = mat.sum(axis=1)
 per_gene_sum = mat.sum(axis=0)
 
-# ===== 2 Сделаем стандартные 95%
-low_expr_thr = np.quantile(per_gene_sum, 0.025)
-high_expr_thr = np.quantile(per_gene_sum, 0.975)
+# ===== 2 Там выбрасывается около 2/3 данных сделаем так же
+low_expr_thr = np.quantile(per_gene_sum, 0.7)
+high_expr_thr = np.quantile(per_gene_sum, 0.97)
 
 mat = mat[:, (per_gene_sum >= low_expr_thr) & (per_gene_sum <= high_expr_thr)]  # just remove extreme outliers
 
